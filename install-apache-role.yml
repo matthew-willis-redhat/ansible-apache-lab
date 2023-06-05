@@ -1,0 +1,8 @@
+---
+- name: Install Apache on Webservers
+  hosts: webservers
+  become: true
+
+  tasks:
+    - include_role:
+        name: apache

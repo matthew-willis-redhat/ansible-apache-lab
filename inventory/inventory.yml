@@ -1,0 +1,5 @@
+webservers:
+  hosts:
+    node[2:3].example.com:
+
+

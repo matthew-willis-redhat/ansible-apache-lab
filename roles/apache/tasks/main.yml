@@ -1,0 +1,26 @@
+---
+- name: Install required packages
+  dnf:
+    name: httpd
+    state: latest
+
+- name: Start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Allow http access via firewall
+  ansible.posix.firewalld:
+    service: http
+    state: enabled
+    immediate: yes
+    permanent: yes
+
+- name: Install custom index.html
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: 0644
+  notify:
+    - restart httpd
